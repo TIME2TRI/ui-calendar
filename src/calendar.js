@@ -229,8 +229,8 @@ angular.module('ui.calendar', [])
             };
         }
     ])
-    .directive('uiCalendar', ['uiCalendarConfig',
-        function (uiCalendarConfig) {
+    .directive('uiCalendar', ['uiCalendarConfig', '$timeout',
+        function (uiCalendarConfig, timeout) {
 
             return {
                 restrict : 'A',
@@ -285,10 +285,14 @@ angular.module('ui.calendar', [])
                             calendar = $(elm).html('');
                             console.log('calendar', calendar);
                         }
-                        calendar.fullCalendar(options);
-                        if (attrs.calendar) {
-                            uiCalendarConfig.calendars[attrs.calendar] = calendar;
-                        }
+                        var t = $timeout(function () {
+                            calendar.fullCalendar(options);
+
+                            if (attrs.calendar) {
+                                uiCalendarConfig.calendars[attrs.calendar] = calendar;
+                            }
+                            $timeout.cancel(t);
+                        }, 1);
                     };
 
                     scope.$on('$destroy', function () {
