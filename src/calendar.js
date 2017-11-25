@@ -233,7 +233,7 @@ angular.module('ui.calendar', [])
         }
     ])
     .directive('uiCalendar', ['uiCalendarConfig', '$timeout',
-        function (uiCalendarConfig, timeout) {
+        function (uiCalendarConfig, $timeout) {
 
             return {
                 restrict : 'A',
