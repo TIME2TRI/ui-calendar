@@ -288,14 +288,11 @@ angular.module('ui.calendar', [])
                             calendar = $(elm).html('');
                             console.log('calendar', calendar);
                         }
-                        var t = $timeout(function () {
-                            calendar.fullCalendar(options);
+                        calendar.fullCalendar(options);
 
-                            if (attrs.calendar) {
-                                uiCalendarConfig.calendars[attrs.calendar] = calendar;
-                            }
-                            $timeout.cancel(t);
-                        }, 1);
+                        if (attrs.calendar) {
+                            uiCalendarConfig.calendars[attrs.calendar] = calendar;
+                        }
                     };
 
                     scope.$on('$destroy', function () {
